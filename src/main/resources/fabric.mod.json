@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "pulsevisual",
+  "version": "1.0.0",
+  "name": "PulseVisual",
+  "description": "Cosmetic visual effects: trail, jump circle, hit color, sky & fog.",
+  "authors": ["You"],
+  "contact": {},
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.pulsevisual.client.PulseVisual"
+    ]
+  },
+  "mixins": [
+    "pulsevisual.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric-api": "*",
+    "minecraft": "~1.20.1",
+    "java": ">=17"
+  }
+}
