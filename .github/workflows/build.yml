@@ -24,10 +24,18 @@ jobs:
         with:
           gradle-version: '8.3'
 
-      - name: Build
-        run: gradle build --no-daemon -x test
+      - name: Build (with log)
+        run: gradle build --no-daemon -x test 2>&1 | tee build-output.txt; exit ${PIPESTATUS[0]}
+
+      - name: Upload build log (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build-output.txt
 
       - name: Upload JAR
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: pulsevisual-jar
