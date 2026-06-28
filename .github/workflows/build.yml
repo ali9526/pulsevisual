@@ -19,17 +19,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Gradle
+      - name: Setup Gradle Wrapper
         run: |
           wget -q https://services.gradle.org/distributions/gradle-8.3-bin.zip -O gradle.zip
           unzip -q gradle.zip
-          echo "$PWD/gradle-8.3/bin" >> $GITHUB_PATH
+          ./gradle-8.3/bin/gradle wrapper --gradle-version 8.3
+          chmod +x gradlew
 
       - name: Build
-        run: gradle build --no-daemon
+        run: ./gradlew build --no-daemon -x test
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
           name: pulsevisual-jar
-          path: build/libs/pulsevisual-*.jar
+          path: build/libs/pulsevisual-1.0.0.jar
